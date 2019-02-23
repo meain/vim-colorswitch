@@ -1,6 +1,15 @@
 import re
-import pynvim
 from colour import Color
+from importlib.util import find_spec
+
+if find_spec('yarp'):
+    import vim
+elif find_spec('pynvim'):
+    import pynvim
+    vim = pynvim
+else:
+    import neovim
+    vim = neovim
 
 COLOR_FORMATS = ["hex", "rgb", "rgba", "hsl"]
 
@@ -84,12 +93,12 @@ def switch_color(line: str):
     return newline
 
 
-@pynvim.plugin
+@vim.plugin
 class Main(object):
     def __init__(self, vim):
         self.vim = vim
 
-    @pynvim.function("ColorSwap", sync=True)
+    @vim.function("ColorSwap", sync=True)
     def colorSwap(self, args):
         line = self.vim.current.line
         self.vim.current.line = switch_color(line)
