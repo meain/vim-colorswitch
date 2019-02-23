@@ -2,7 +2,6 @@ import re
 import pynvim
 from colour import Color
 
-
 COLOR_FORMATS = ["hex", "rgb", "rgba", "hsl"]
 
 
@@ -70,10 +69,10 @@ def format_color(color, to: str = "hex") -> str:
     if to == "hsl":
         return "hsl" + str(simplify_color_values(color.hsl))
     elif to == "rgb":
-        return "rgb" + str(simplify_color_values(color.hsl))
+        return "rgb" + str(simplify_color_values(color.rgb))
     elif to == "rgba":
-        return "rgba" + str(simplify_color_values(tuple(list(color.hsl) + [1.0])))
-    return color.hex
+        return "rgba" + str(simplify_color_values(tuple(list(color.rgb) + [1.0])))
+    return color.hex_l
 
 
 def switch_color(line: str):
