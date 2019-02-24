@@ -30,7 +30,7 @@ Exposes one command
 :ColorSwap
 ```
 
-You can call it on any line with a color value and it will cycle through `hex`, `rgb`, `rgba`, `hsl` values for that
+You can call it on any line with a color value and it will cycle through (`hex`, `rgb`, `hsl`) or (`hex with alpha`, `rgba`, `hsla`) values for that
 color and replace the value in the line.
 
 You could maybe create a remap like:
