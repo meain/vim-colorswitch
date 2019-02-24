@@ -2,10 +2,6 @@ import re
 from colour import Color
 from importlib.util import find_spec
 
-# from .utils import cycle_color
-# from importlib import import_module
-# utils = import_module('utils')
-
 if find_spec("yarp"):
     import vim
 elif find_spec("pynvim"):
@@ -22,7 +18,7 @@ COLOR_FORMATS = {
     "without_alpha": ["hex", "rgb", "hsl"],
     "with_alpha": ["hexa", "rgba", "hsla"],
 }
-CSS_MODE = False
+CSS_MODE = True
 PRECESION_LIMIT = 2
 
 
@@ -62,28 +58,56 @@ def find_color_string(line: str):
     return None, None, None
 
 
+def de_cssify(values, from_format="rgb"):
+    if not CSS_MODE:
+        return values
+    values = list([int(v.replace("%", "").strip()) for v in values])
+    if from_format == "rgb":
+        values = [v / 255 for v in values]
+    elif from_format == "hsl":
+        values[0] = values[0] / 360
+        values[1] = values[1] / 100
+        values[2] = values[2] / 100
+    return tuple(values)
+
+
+def cssify(values, to_format="rgb"):
+    if not CSS_MODE:
+        return values
+    values = list(values)
+    if to_format == "rgb":
+        values = [int(v * 255) for v in values]
+    elif to_format == "hsl":
+        values[0] = int(values[0] * 360)
+        values[1] = str(int(values[1] * 100)) + "%"
+        values[2] = str(int(values[2] * 100)) + "%"
+    return tuple(values)
+
+
 def get_color_object(color: str):
     alpha = 1.0
     if color.startswith("rgb("):
         clr = color[color.find("(") + 1 : color.find(")")]
-        clr = clr.split(",")
+        clr = de_cssify(clr.split(","))
         color_object = Color(rgb=clr)
     elif color.startswith("rgba("):
         clr = color[color.find("(") + 1 : color.find(")")]
         clr = clr.split(",")
         alpha = clr[-1]
         clr = clr[:-1]
+        clr = de_cssify(clr)
         color_object = Color(rgb=clr)
 
     elif color.startswith("hsl("):
         clr = color[color.find("(") + 1 : color.find(")")]
-        clr = clr.split(",")
+        clr = de_cssify(clr.split(","), "hsl")
         color_object = Color(hsl=clr)
     elif color.startswith("hsla("):
         clr = color[color.find("(") + 1 : color.find(")")]
         clr = clr.split(",")
         alpha = clr[-1]
         clr = clr[:-1]
+        clr = de_cssify(clr, "hsl")
         color_object = Color(hsl=clr)
 
     elif color.startswith("#"):
@@ -113,14 +137,18 @@ def format_color(color, to: str = "hex") -> str:
     if isinstance(color, str):
         color, alpha = get_color_object(color)
     if to == "hsl":
-        return "hsl" + str(simplify_color_values(color.hsl))
+        return "hsl" + str(cssify(simplify_color_values(color.hsl), "hsl")).replace("'", "").replace("  ", " ")
     elif to == "hsla":
-        return "hsla" + str(simplify_color_values(tuple(list(color.hsl) + [alpha])))
+        return "hsla" + str(
+            tuple(list(cssify(simplify_color_values(color.hsl), "hsl")) + [alpha])
+        ).replace("'", "").replace("  ", " ")  # I know, I will fix it
 
     elif to == "rgb":
-        return "rgb" + str(simplify_color_values(color.rgb))
+        return "rgb" + str(cssify(simplify_color_values(color.rgb))).replace("'", "").replace("  ", " ")
     elif to == "rgba":
-        return "rgba" + str(simplify_color_values(tuple(list(color.rgb) + [alpha])))
+        return "rgba" + str(
+            tuple(list(cssify(simplify_color_values(color.rgb))) + [alpha])
+        ).replace("'", "").replace("  ", " ")
     elif to == "hexa":
         return color.hex_l + _get_hex_alpha(alpha)
     return color.hex_l

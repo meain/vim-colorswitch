@@ -2,6 +2,7 @@
 
 ![gif](https://i.imgur.com/eH7LpKa.gif)
 
+
 ## Installation
 
 > Install `colour` package from pypi using

@@ -3,8 +3,21 @@ from .colorswitch import format_color
 
 
 tests = [
-    {"hex": "#000000", "rgb": "rgb(0.0, 0.0, 0.0)", "hsl": "hsl(0.0, 0.0, 0.0)"},
-    {"hexa": "#ff0000e0", "rgba": "rgba(1.0, 0.0, 0.0, 0.88)", "hsla": "hsla(0.0, 1.0, 0.5, 0.88)"},
+    {
+        "hexa": "#ff0000e0",
+        "rgba": "rgba(255, 0, 0, 0.88)",
+        "hsla": "hsla(0, 100%, 50%, 0.88)",
+    },
+    {
+        "hex": "#ff0000",
+        "rgb": "rgb(255, 0, 0)",
+        "hsl": "hsl(0, 100%, 50%)",
+    },
+    # {
+    #     "hexa": "#3d5c3fea",
+    #     "rgba": "rgba(61, 91, 63, 0.92)",
+    #     "hsla": "hsla(122, 20%, 30%, 0.92)",
+    # },
 ]
 
 for test in tests:
