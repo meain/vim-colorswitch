@@ -1,6 +1,6 @@
 # `vim-colorswitch`
 
-![gif](https://i.imgur.com/eH7LpKa.gif)
+![gif](https://i.imgur.com/0eXBOvT.gif)
 
 ## Installation
 
