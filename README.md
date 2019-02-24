@@ -2,13 +2,14 @@
 
 ![gif](https://i.imgur.com/eH7LpKa.gif)
 
-
 ## Installation
 
 > Install `colour` package from pypi using
+
 ```
 pip3 install colour
-``` 
+```
+
 and add it to your package manager (example for vim-plug)
 
 ```
@@ -21,9 +22,7 @@ else
 endif
 ```
 
-
 ## Usage
-
 
 Exposes one command
 
@@ -35,7 +34,16 @@ You can call it on any line with a color value and it will cycle through `hex`, 
 color and replace the value in the line.
 
 You could maybe create a remap like:
+
 ```
 
 nnoremap <leader>c :exec ColorSwap()<CR>
 ```
+
+### FAQ
+
+#### My colors seems to change a bit when I cycle back to hex
+
+Yeah, that mostly happens due to precision issue, but I won't be a big change.
+The precision level is now set to 2. If not set you might get values like
+`rgb(22.3434398734, 54.234234324, 2)` and I  am guessing nobody wants that.
