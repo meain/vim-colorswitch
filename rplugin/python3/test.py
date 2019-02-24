@@ -4,8 +4,7 @@ from .colorswitch import format_color
 
 tests = [
     {"hex": "#000000", "rgb": "rgb(0.0, 0.0, 0.0)", "hsl": "hsl(0.0, 0.0, 0.0)"},
-    {"hex": "#ff0000", "rgb": "rgb(1.0, 0.0, 0.0)", "hsl": "hsl(0.0, 1.0, 0.5)"},
-    {"hex": "#ff000080", "rgba": "rgba(1.0, 0.0, 0.0, 0.5)", "hsla": "hsla(0.0, 1.0, 0.5, 0.5)"},
+    {"hexa": "#ff0000e0", "rgba": "rgba(1.0, 0.0, 0.0, 0.88)", "hsla": "hsla(0.0, 1.0, 0.5, 0.88)"},
 ]
 
 for test in tests:

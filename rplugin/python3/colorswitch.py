@@ -23,6 +23,7 @@ COLOR_FORMATS = {
     "with_alpha": ["hexa", "rgba", "hsla"],
 }
 CSS_MODE = False
+PRECESION_LIMIT = 2
 
 
 def find_color_string(line: str):
@@ -90,19 +91,19 @@ def get_color_object(color: str):
             color_object = Color(color)
         elif len(color) == 9:
             color_object = Color(color[:-2])
-            alpha = int(color[-2:], 16) / 100
+            alpha = round(int(color[-2:], 16) / 255, PRECESION_LIMIT)
     return color_object, alpha
 
 
 def simplify_color_values(values):
     values = list(values)
     for i in range(len(values)):
-        values[i] = round(float(str(values[i]).strip()), 2)
+        values[i] = round(float(str(values[i]).strip()), PRECESION_LIMIT)
     return tuple(values)
 
 
 def _get_hex_alpha(value=int):
-    str_value = str(hex(int(float(str(value).strip()) * 100)))[2:]
+    str_value = str(hex(int(float(str(value).strip()) * 255)))[2:]
     if len(str_value) == 1:
         str_value = "0" + str_value
     return str_value
@@ -114,7 +115,7 @@ def format_color(color, to: str = "hex") -> str:
     if to == "hsl":
         return "hsl" + str(simplify_color_values(color.hsl))
     elif to == "hsla":
-        return "hsla" + str(simplify_color_values(tuple(list(color.rgb) + [alpha])))
+        return "hsla" + str(simplify_color_values(tuple(list(color.hsl) + [alpha])))
 
     elif to == "rgb":
         return "rgb" + str(simplify_color_values(color.rgb))
