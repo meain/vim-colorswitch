@@ -35,22 +35,22 @@ def find_color_string(line: str):
         return "hex", re_match.span(), line[re_match.span()[0] : re_match.span()[1]]
 
     # rgb formats
-    re_match = re.search(r"rgb\(\ *\d*.?\d*\ *,\ *\d*.?\d*\ *,\ *\d*.?\d*\ *\)", line)
+    re_match = re.search(r"rgb\(\ *\d*\.?\d*\ *,\ *\d*\.?\d*\ *,\ *\d*\.?\d*\ *\)", line)
     if re_match:
         return "rgb", re_match.span(), line[re_match.span()[0] : re_match.span()[1]]
 
     re_match = re.search(
-        r"rgba\(\ *\d*.?\d*\ *,\ *\d*.?\d*\ *,\ *\d*.?\d*\ *,\ *\d*.?\d*\ *\)", line
+        r"rgba\(\ *\d*\.?\d*\ *,\ *\d*\.?\d*\ *,\ *\d*\.?\d*\ *,\ *\d*\.?\d*\ *\)", line
     )
     if re_match:
         return "rgba", re_match.span(), line[re_match.span()[0] : re_match.span()[1]]
 
     # hsl formats
-    re_match = re.search(r"hsl\(\ *\d*.?\d*\ *,\ *\d*.?\d*\ *,\ *\d*.?\d*\ *\)", line)
+    re_match = re.search(r"hsl\(\ *\d*\.?\d*\ *,\ *\d*\.?\d*\%?\ *,\ *\d*\.?\d*\%?\ *\)", line)
     if re_match:
         return "hsl", re_match.span(), line[re_match.span()[0] : re_match.span()[1]]
     re_match = re.search(
-        r"hsla\(\ *\d*.?\d*\ *,\ *\d*.?\d*\ *,\ *\d*.?\d*\ *,\ *\d*.?\d*\ *\)", line
+        r"hsla\(\ *\d*\.?\d*\ *,\ *\d*\.?\d*\%?\ *,\ *\d*\.?\d*\%?\ *,\ *\d*\.?\d*\ *\)", line
     )
     if re_match:
         return "hsla", re_match.span(), line[re_match.span()[0] : re_match.span()[1]]
