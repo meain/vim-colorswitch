@@ -173,7 +173,7 @@ class Main(object):
     def __init__(self, vim):
         self.vim = vim
 
-    @vim.function("ColorSwap", sync=True)
-    def colorSwap(self, args):
+    @vim.command("ColorSwap")
+    def colorSwap(self):
         line = self.vim.current.line
         self.vim.current.line = cycle_color(line)

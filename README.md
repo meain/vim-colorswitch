@@ -37,7 +37,7 @@ You could maybe create a remap like:
 
 ```
 
-nnoremap <leader>c :exec ColorSwap()<CR>
+nnoremap <leader>c :ColorSwap<CR>
 ```
 
 ### FAQ
