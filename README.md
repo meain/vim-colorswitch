@@ -44,6 +44,6 @@ nnoremap <leader>c :exec ColorSwap()<CR>
 
 #### My colors seems to change a bit when I cycle back to hex
 
-Yeah, that mostly happens due to precision issue, but I won't be a big change.
+Yeah, that happens due to precision issue, but it won't be a big change.
 The precision level is now set to 2. If not set you might get values like
-`rgb(22.3434398734, 54.234234324, 2)` and I  am guessing nobody wants that.
+`rgb(22.3434398734, 54.234234324, 2)` which I am guessing nobody wants.
