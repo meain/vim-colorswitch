@@ -24,10 +24,10 @@ PRECESION_LIMIT = 2
 
 def find_color_string(line: str):
     # hex formats
-    re_match = re.search(r"#[0-9a-f]{8}", line)
+    re_match = re.search(r"#[0-9a-fA-F]{8}", line)
     if re_match:
         return "hexa", re_match.span(), line[re_match.span()[0] : re_match.span()[1]]
-    re_match = re.search(r"#[0-9a-f]{6}", line)
+    re_match = re.search(r"#[0-9a-fA-F]{6}", line)
     if re_match:
         return "hex", re_match.span(), line[re_match.span()[0] : re_match.span()[1]]
     re_match = re.search(r"#[0-9a-f]{3}", line)
