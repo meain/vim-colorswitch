@@ -47,3 +47,7 @@ nnoremap <leader>c :ColorSwap<CR>
 Yeah, that happens due to precision issue, but it won't be a big change.
 The precision level is now set to 2. If not set you might get values like
 `rgb(22.3434398734, 54.234234324, 2)` which I am guessing nobody wants.
+
+
+## Alternatives:
+- [amadeus/vim-convert-color-to](https://github.com/amadeus/vim-convert-color-to)
